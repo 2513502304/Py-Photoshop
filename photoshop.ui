@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>PhotoShop</class>
+    <widget class="QMainWindow" name="PhotoShop">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>841</width>
+                <height>645</height>
+            </rect>
+        </property>
+        <property name="mouseTracking">
+            <bool>false</bool>
+        </property>
+        <property name="windowTitle">
+            <string>Photoshop</string>
+        </property>
+        <property name="toolTip">
+            <string>Photoshop</string>
+        </property>
+        <widget class="QWidget" name="centralwidget">
+            <property name="mouseTracking">
+                <bool>false</bool>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout">
+                <item>
+                    <widget class="GraphicView" name="graphicsView">
+                        <property name="mouseTracking">
+                            <bool>false</bool>
+                        </property>
+                    </widget>
+                </item>
+            </layout>
+        </widget>
+        <widget class="QMenuBar" name="menubar">
+            <property name="geometry">
+                <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>841</width>
+                    <height>33</height>
+                </rect>
+            </property>
+            <widget class="QMenu" name="menuFile">
+                <property name="title">
+                    <string>文件(F)</string>
+                </property>
+                <addaction name="actionCreate"/>
+                <addaction name="actionOpen"/>
+                <addaction name="separator"/>
+                <addaction name="actionSave"/>
+                <addaction name="actionSaveAs"/>
+                <addaction name="separator"/>
+                <addaction name="actionQuit"/>
+            </widget>
+            <widget class="QMenu" name="menuEdit">
+                <property name="title">
+                    <string>编辑(E)</string>
+                </property>
+            </widget>
+            <widget class="QMenu" name="menuImage">
+                <property name="title">
+                    <string>图像(I)</string>
+                </property>
+                <widget class="QMenu" name="menuMode">
+                    <property name="title">
+                        <string>模式(M)</string>
+                    </property>
+                    <addaction name="actionBitmap"/>
+                    <addaction name="actionGray"/>
+                    <addaction name="actionTwoTone"/>
+                    <addaction name="actionIndexColor"/>
+                    <addaction name="actionRGBColor"/>
+                    <addaction name="actionCMYKColor"/>
+                    <addaction name="actionLabColor"/>
+                    <addaction name="actionMultiChannel"/>
+                    <addaction name="separator"/>
+                    <addaction name="action8Bit"/>
+                    <addaction name="action16Bit"/>
+                    <addaction name="action32Bit"/>
+                    <addaction name="separator"/>
+                    <addaction name="actionColorTable"/>
+                </widget>
+                <widget class="QMenu" name="menu_Adjust">
+                    <property name="title">
+                        <string>调整(J)</string>
+                    </property>
+                    <addaction name="actionBrightnessContrast"/>
+                    <addaction name="actionColorScale"/>
+                    <addaction name="actionCurve"/>
+                    <addaction name="actionExposure"/>
+                    <addaction name="separator"/>
+                    <addaction name="actionNaturalSaturation"/>
+                    <addaction name="actionColorSaturation"/>
+                    <addaction name="actionColorBalance"/>
+                    <addaction name="actionMonochrome"/>
+                    <addaction name="actionPhotoFilters"/>
+                    <addaction name="actionChannelMixer"/>
+                    <addaction name="actionColorSearch"/>
+                    <addaction name="separator"/>
+                    <addaction name="actionInversion"/>
+                    <addaction name="actionColorSeparation"/>
+                    <addaction name="actionThresholds"/>
+                    <addaction name="actionGradientMapping"/>
+                    <addaction name="actionAvailableColors"/>
+                    <addaction name="separator"/>
+                    <addaction name="actionShadowHighlight"/>
+                    <addaction name="actionHDRTone"/>
+                    <addaction name="separator"/>
+                    <addaction name="actionDecolorization"/>
+                    <addaction name="actionColorMatching"/>
+                    <addaction name="actionReplacementColor"/>
+                    <addaction name="actionToneHomogenization"/>
+                </widget>
+                <addaction name="menuMode"/>
+                <addaction name="separator"/>
+                <addaction name="menu_Adjust"/>
+            </widget>
+            <widget class="QMenu" name="menuLayer">
+                <property name="title">
+                    <string>图层(L)</string>
+                </property>
+            </widget>
+            <widget class="QMenu" name="menuWord">
+                <property name="title">
+                    <string>文字(Y)</string>
+                </property>
+            </widget>
+            <widget class="QMenu" name="menuSelect">
+                <property name="title">
+                    <string>选择(S)</string>
+                </property>
+            </widget>
+            <widget class="QMenu" name="menuFilter">
+                <property name="title">
+                    <string>滤镜(T)</string>
+                </property>
+            </widget>
+            <widget class="QMenu" name="menu3D">
+                <property name="title">
+                    <string>3D(D)</string>
+                </property>
+            </widget>
+            <widget class="QMenu" name="menuView">
+                <property name="title">
+                    <string>视图(V)</string>
+                </property>
+            </widget>
+            <widget class="QMenu" name="menuPlugIns">
+                <property name="title">
+                    <string>增效工具</string>
+                </property>
+            </widget>
+            <widget class="QMenu" name="menuWindow">
+                <property name="title">
+                    <string>窗口(W)</string>
+                </property>
+            </widget>
+            <widget class="QMenu" name="menuHelp">
+                <property name="title">
+                    <string>帮助(H)</string>
+                </property>
+            </widget>
+            <addaction name="menuFile"/>
+            <addaction name="menuEdit"/>
+            <addaction name="menuImage"/>
+            <addaction name="menuLayer"/>
+            <addaction name="menuWord"/>
+            <addaction name="menuSelect"/>
+            <addaction name="menuFilter"/>
+            <addaction name="menu3D"/>
+            <addaction name="menuView"/>
+            <addaction name="menuPlugIns"/>
+            <addaction name="menuWindow"/>
+            <addaction name="menuHelp"/>
+        </widget>
+        <widget class="QStatusBar" name="statusbar"/>
+        <widget class="QDockWidget" name="dockWidget">
+            <attribute name="dockWidgetArea">
+                <number>2</number>
+            </attribute>
+            <widget class="QWidget" name="dockWidgetContents">
+                <layout class="QVBoxLayout" name="verticalLayout_2">
+                    <item>
+                        <widget class="QTabWidget" name="tabWidget">
+                            <property name="currentIndex">
+                                <number>0</number>
+                            </property>
+                            <widget class="QWidget" name="tabColor">
+                                <property name="accessibleName">
+                                    <string/>
+                                </property>
+                                <attribute name="title">
+                                    <string>颜色</string>
+                                </attribute>
+                            </widget>
+                            <widget class="QWidget" name="tabSwatches">
+                                <attribute name="title">
+                                    <string>色板</string>
+                                </attribute>
+                            </widget>
+                            <widget class="QWidget" name="tabGradient">
+                                <attribute name="title">
+                                    <string>渐变</string>
+                                </attribute>
+                            </widget>
+                            <widget class="QWidget" name="tabPattern">
+                                <attribute name="title">
+                                    <string>图案</string>
+                                </attribute>
+                            </widget>
+                        </widget>
+                    </item>
+                </layout>
+            </widget>
+        </widget>
+        <widget class="QDockWidget" name="dockWidget_2">
+            <attribute name="dockWidgetArea">
+                <number>1</number>
+            </attribute>
+            <widget class="QWidget" name="dockWidgetContents_2"/>
+        </widget>
+        <action name="actionOpen">
+            <property name="text">
+                <string>打开(O)</string>
+            </property>
+        </action>
+        <action name="actionSave">
+            <property name="text">
+                <string>存储(S)</string>
+            </property>
+        </action>
+        <action name="actionSaveAs">
+            <property name="text">
+                <string>存储为(A)</string>
+            </property>
+            <property name="toolTip">
+                <string>存储为(A)</string>
+            </property>
+        </action>
+        <action name="actionCreate">
+            <property name="text">
+                <string>新建(N)</string>
+            </property>
+        </action>
+        <action name="actionBitmap">
+            <property name="text">
+                <string>位图(B)</string>
+            </property>
+        </action>
+        <action name="actionGray">
+            <property name="text">
+                <string>灰度(G)</string>
+            </property>
+        </action>
+        <action name="actionTwoTone">
+            <property name="text">
+                <string>双色调(D)</string>
+            </property>
+        </action>
+        <action name="actionIndexColor">
+            <property name="text">
+                <string>索引颜色(I)</string>
+            </property>
+        </action>
+        <action name="actionRGBColor">
+            <property name="text">
+                <string>RGB颜色(R)</string>
+            </property>
+        </action>
+        <action name="actionCMYKColor">
+            <property name="text">
+                <string>CMYK颜色(C)</string>
+            </property>
+        </action>
+        <action name="actionLabColor">
+            <property name="text">
+                <string>Lab颜色(L)</string>
+            </property>
+        </action>
+        <action name="actionMultiChannel">
+            <property name="text">
+                <string>多通道(M)</string>
+            </property>
+        </action>
+        <action name="action8Bit">
+            <property name="text">
+                <string>8位/通道(A)</string>
+            </property>
+        </action>
+        <action name="action16Bit">
+            <property name="text">
+                <string>16位/通道(N)</string>
+            </property>
+        </action>
+        <action name="action32Bit">
+            <property name="text">
+                <string>32位/通道(H)</string>
+            </property>
+        </action>
+        <action name="actionQuit">
+            <property name="text">
+                <string>退出(Q)</string>
+            </property>
+        </action>
+        <action name="actionColorTable">
+            <property name="text">
+                <string>颜色表(T)</string>
+            </property>
+        </action>
+        <action name="actionBrightnessContrast">
+            <property name="text">
+                <string>亮度/对比度(C)</string>
+            </property>
+        </action>
+        <action name="actionColorScale">
+            <property name="text">
+                <string>色阶(L)</string>
+            </property>
+        </action>
+        <action name="actionCurve">
+            <property name="text">
+                <string>曲线(U)</string>
+            </property>
+        </action>
+        <action name="actionExposure">
+            <property name="text">
+                <string>曝光度(E)</string>
+            </property>
+        </action>
+        <action name="actionNaturalSaturation">
+            <property name="text">
+                <string>自然饱和度(V)</string>
+            </property>
+        </action>
+        <action name="actionColorSaturation">
+            <property name="text">
+                <string>色相/饱和度(H)</string>
+            </property>
+        </action>
+        <action name="actionColorBalance">
+            <property name="text">
+                <string>色彩平衡(B)</string>
+            </property>
+        </action>
+        <action name="actionMonochrome">
+            <property name="text">
+                <string>黑白(B)</string>
+            </property>
+        </action>
+        <action name="actionPhotoFilters">
+            <property name="text">
+                <string>照片滤镜(F)</string>
+            </property>
+        </action>
+        <action name="actionChannelMixer">
+            <property name="text">
+                <string>通道混合器(X)</string>
+            </property>
+        </action>
+        <action name="actionColorSearch">
+            <property name="text">
+                <string>颜色查找</string>
+            </property>
+        </action>
+        <action name="actionInversion">
+            <property name="text">
+                <string>反相(I)</string>
+            </property>
+        </action>
+        <action name="actionColorSeparation">
+            <property name="text">
+                <string>色调分离(P)</string>
+            </property>
+        </action>
+        <action name="actionThresholds">
+            <property name="text">
+                <string>阈值(T)</string>
+            </property>
+        </action>
+        <action name="actionGradientMapping">
+            <property name="text">
+                <string>渐变映射(G)</string>
+            </property>
+        </action>
+        <action name="actionAvailableColors">
+            <property name="text">
+                <string>可选颜色(S)</string>
+            </property>
+        </action>
+        <action name="actionShadowHighlight">
+            <property name="text">
+                <string>阴影/高光(W)</string>
+            </property>
+        </action>
+        <action name="actionHDRTone">
+            <property name="text">
+                <string>HDR色调</string>
+            </property>
+        </action>
+        <action name="actionDecolorization">
+            <property name="text">
+                <string>去色(D)</string>
+            </property>
+        </action>
+        <action name="actionColorMatching">
+            <property name="text">
+                <string>匹配颜色(M)</string>
+            </property>
+        </action>
+        <action name="actionReplacementColor">
+            <property name="text">
+                <string>替换颜色(R)</string>
+            </property>
+        </action>
+        <action name="actionToneHomogenization">
+            <property name="text">
+                <string>色调均化(Q)</string>
+            </property>
+        </action>
+    </widget>
+    <customwidgets>
+        <customwidget>
+            <class>GraphicView</class>
+            <extends>QGraphicsView</extends>
+            <header location="global">graphicview.h</header>
+        </customwidget>
+    </customwidgets>
+    <resources/>
+    <connections/>
+</ui>
