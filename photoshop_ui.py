@@ -9,18 +9,19 @@
 ################################################################################
 
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
+                            QMetaObject, QObject, QPoint, QRect,
+                            QSize, QTime, QUrl, Qt)
 from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
-    QCursor, QFont, QFontDatabase, QGradient,
-    QIcon, QImage, QKeySequence, QLinearGradient,
-    QPainter, QPalette, QPixmap, QRadialGradient,
-    QTransform)
+                           QCursor, QFont, QFontDatabase, QGradient,
+                           QIcon, QImage, QKeySequence, QLinearGradient,
+                           QPainter, QPalette, QPixmap, QRadialGradient,
+                           QTransform)
 from PySide6.QtWidgets import (QApplication, QDockWidget, QMainWindow, QMenu,
-    QMenuBar, QSizePolicy, QStatusBar, QTabWidget,
-    QVBoxLayout, QWidget)
+                               QMenuBar, QSizePolicy, QStatusBar, QTabWidget,
+                               QVBoxLayout, QWidget)
 
 from graphicview import GraphicView
+
 
 class Ui_PhotoShop(object):
     def setupUi(self, PhotoShop):
@@ -252,21 +253,21 @@ class Ui_PhotoShop(object):
 
         self.tabWidget.setCurrentIndex(0)
 
-
         QMetaObject.connectSlotsByName(PhotoShop)
+
     # setupUi
 
     def retranslateUi(self, PhotoShop):
         PhotoShop.setWindowTitle(QCoreApplication.translate("PhotoShop", u"Photoshop", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         PhotoShop.setToolTip(QCoreApplication.translate("PhotoShop", u"Photoshop", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.actionOpen.setText(QCoreApplication.translate("PhotoShop", u"\u6253\u5f00(O)", None))
         self.actionSave.setText(QCoreApplication.translate("PhotoShop", u"\u5b58\u50a8(S)", None))
         self.actionSaveAs.setText(QCoreApplication.translate("PhotoShop", u"\u5b58\u50a8\u4e3a(A)", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         self.actionSaveAs.setToolTip(QCoreApplication.translate("PhotoShop", u"\u5b58\u50a8\u4e3a(A)", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.actionCreate.setText(QCoreApplication.translate("PhotoShop", u"\u65b0\u5efa(N)", None))
         self.actionBitmap.setText(QCoreApplication.translate("PhotoShop", u"\u4f4d\u56fe(B)", None))
         self.actionGray.setText(QCoreApplication.translate("PhotoShop", u"\u7070\u5ea6(G)", None))
@@ -281,28 +282,38 @@ class Ui_PhotoShop(object):
         self.action32Bit.setText(QCoreApplication.translate("PhotoShop", u"32\u4f4d/\u901a\u9053(H)", None))
         self.actionQuit.setText(QCoreApplication.translate("PhotoShop", u"\u9000\u51fa(Q)", None))
         self.actionColorTable.setText(QCoreApplication.translate("PhotoShop", u"\u989c\u8272\u8868(T)", None))
-        self.actionBrightnessContrast.setText(QCoreApplication.translate("PhotoShop", u"\u4eae\u5ea6/\u5bf9\u6bd4\u5ea6(C)", None))
+        self.actionBrightnessContrast.setText(
+            QCoreApplication.translate("PhotoShop", u"\u4eae\u5ea6/\u5bf9\u6bd4\u5ea6(C)", None))
         self.actionColorScale.setText(QCoreApplication.translate("PhotoShop", u"\u8272\u9636(L)", None))
         self.actionCurve.setText(QCoreApplication.translate("PhotoShop", u"\u66f2\u7ebf(U)", None))
         self.actionExposure.setText(QCoreApplication.translate("PhotoShop", u"\u66dd\u5149\u5ea6(E)", None))
-        self.actionNaturalSaturation.setText(QCoreApplication.translate("PhotoShop", u"\u81ea\u7136\u9971\u548c\u5ea6(V)", None))
-        self.actionColorSaturation.setText(QCoreApplication.translate("PhotoShop", u"\u8272\u76f8/\u9971\u548c\u5ea6(H)", None))
+        self.actionNaturalSaturation.setText(
+            QCoreApplication.translate("PhotoShop", u"\u81ea\u7136\u9971\u548c\u5ea6(V)", None))
+        self.actionColorSaturation.setText(
+            QCoreApplication.translate("PhotoShop", u"\u8272\u76f8/\u9971\u548c\u5ea6(H)", None))
         self.actionColorBalance.setText(QCoreApplication.translate("PhotoShop", u"\u8272\u5f69\u5e73\u8861(B)", None))
         self.actionMonochrome.setText(QCoreApplication.translate("PhotoShop", u"\u9ed1\u767d(B)", None))
         self.actionPhotoFilters.setText(QCoreApplication.translate("PhotoShop", u"\u7167\u7247\u6ee4\u955c(F)", None))
-        self.actionChannelMixer.setText(QCoreApplication.translate("PhotoShop", u"\u901a\u9053\u6df7\u5408\u5668(X)", None))
+        self.actionChannelMixer.setText(
+            QCoreApplication.translate("PhotoShop", u"\u901a\u9053\u6df7\u5408\u5668(X)", None))
         self.actionColorSearch.setText(QCoreApplication.translate("PhotoShop", u"\u989c\u8272\u67e5\u627e", None))
         self.actionInversion.setText(QCoreApplication.translate("PhotoShop", u"\u53cd\u76f8(I)", None))
-        self.actionColorSeparation.setText(QCoreApplication.translate("PhotoShop", u"\u8272\u8c03\u5206\u79bb(P)", None))
+        self.actionColorSeparation.setText(
+            QCoreApplication.translate("PhotoShop", u"\u8272\u8c03\u5206\u79bb(P)", None))
         self.actionThresholds.setText(QCoreApplication.translate("PhotoShop", u"\u9608\u503c(T)", None))
-        self.actionGradientMapping.setText(QCoreApplication.translate("PhotoShop", u"\u6e10\u53d8\u6620\u5c04(G)", None))
-        self.actionAvailableColors.setText(QCoreApplication.translate("PhotoShop", u"\u53ef\u9009\u989c\u8272(S)", None))
-        self.actionShadowHighlight.setText(QCoreApplication.translate("PhotoShop", u"\u9634\u5f71/\u9ad8\u5149(W)", None))
+        self.actionGradientMapping.setText(
+            QCoreApplication.translate("PhotoShop", u"\u6e10\u53d8\u6620\u5c04(G)", None))
+        self.actionAvailableColors.setText(
+            QCoreApplication.translate("PhotoShop", u"\u53ef\u9009\u989c\u8272(S)", None))
+        self.actionShadowHighlight.setText(
+            QCoreApplication.translate("PhotoShop", u"\u9634\u5f71/\u9ad8\u5149(W)", None))
         self.actionHDRTone.setText(QCoreApplication.translate("PhotoShop", u"HDR\u8272\u8c03", None))
         self.actionDecolorization.setText(QCoreApplication.translate("PhotoShop", u"\u53bb\u8272(D)", None))
         self.actionColorMatching.setText(QCoreApplication.translate("PhotoShop", u"\u5339\u914d\u989c\u8272(M)", None))
-        self.actionReplacementColor.setText(QCoreApplication.translate("PhotoShop", u"\u66ff\u6362\u989c\u8272(R)", None))
-        self.actionToneHomogenization.setText(QCoreApplication.translate("PhotoShop", u"\u8272\u8c03\u5747\u5316(Q)", None))
+        self.actionReplacementColor.setText(
+            QCoreApplication.translate("PhotoShop", u"\u66ff\u6362\u989c\u8272(R)", None))
+        self.actionToneHomogenization.setText(
+            QCoreApplication.translate("PhotoShop", u"\u8272\u8c03\u5747\u5316(Q)", None))
         self.menuFile.setTitle(QCoreApplication.translate("PhotoShop", u"\u6587\u4ef6(F)", None))
         self.menuEdit.setTitle(QCoreApplication.translate("PhotoShop", u"\u7f16\u8f91(E)", None))
         self.menuImage.setTitle(QCoreApplication.translate("PhotoShop", u"\u56fe\u50cf(I)", None))
@@ -317,12 +328,15 @@ class Ui_PhotoShop(object):
         self.menuPlugIns.setTitle(QCoreApplication.translate("PhotoShop", u"\u589e\u6548\u5de5\u5177", None))
         self.menuWindow.setTitle(QCoreApplication.translate("PhotoShop", u"\u7a97\u53e3(W)", None))
         self.menuHelp.setTitle(QCoreApplication.translate("PhotoShop", u"\u5e2e\u52a9(H)", None))
-#if QT_CONFIG(accessibility)
+        # if QT_CONFIG(accessibility)
         self.tabColor.setAccessibleName("")
-#endif // QT_CONFIG(accessibility)
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabColor), QCoreApplication.translate("PhotoShop", u"\u989c\u8272", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabSwatches), QCoreApplication.translate("PhotoShop", u"\u8272\u677f", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabGradient), QCoreApplication.translate("PhotoShop", u"\u6e10\u53d8", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabPattern), QCoreApplication.translate("PhotoShop", u"\u56fe\u6848", None))
+        # endif // QT_CONFIG(accessibility)
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabColor),
+                                  QCoreApplication.translate("PhotoShop", u"\u989c\u8272", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabSwatches),
+                                  QCoreApplication.translate("PhotoShop", u"\u8272\u677f", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabGradient),
+                                  QCoreApplication.translate("PhotoShop", u"\u6e10\u53d8", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabPattern),
+                                  QCoreApplication.translate("PhotoShop", u"\u56fe\u6848", None))
     # retranslateUi
-

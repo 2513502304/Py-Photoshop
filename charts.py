@@ -1,6 +1,7 @@
 '''Charts for Photoshop'''
 
-from PySide6.QtWidgets import QApplication, QWidget, QMainWindow, QDockWidget, QVBoxLayout, QGraphicsView, QGraphicsScene, QRubberBand, QPushButton
+from PySide6.QtWidgets import QApplication, QWidget, QMainWindow, QDockWidget, QVBoxLayout, QGraphicsView, \
+    QGraphicsScene, QRubberBand, QPushButton
 from PySide6.QtCore import Qt, QPoint, QPointF, QRect, QRectF, QSize, QSizeF
 from PySide6.QtGui import QPainter, QPen, QBrush, QColor, QPalette
 import sys
@@ -41,7 +42,7 @@ class HistogramGraphicsView(QGraphicsView):
         # 橡皮筋选择框
         self.rubberBand = QRubberBand(QRubberBand.Rectangle, self)
         # 设置样式表，注意，QRubberBand 为非窗口控件，依附于其它窗口，无法使用样式表设置 background-color，只能使用 selection-background-color 设置背景颜色
-        self.rubberBand.setStyleSheet('selection-background-color: rgba(255, 192, 203, 128);')
+        self.rubberBand.setStyleSheet('selection-background-color: rgba(0, 0, 0, 128);')
         # 橡皮筋选择框的起点
         self.origin = QPoint()
 
@@ -134,13 +135,14 @@ class HistogramDockWidget(QDockWidget):
         # 灰度图
         if channels == 0:
             color = [(0, 0, 0)]
-            hists = np.array(cv.calcHist([image], channels=[0], mask=None, histSize=[256], ranges=[0, 256])).reshape(1, -1)
+            hists = np.array(cv.calcHist([image], channels=[0], mask=None, histSize=[256], ranges=[0, 256])).reshape(1,
+                                                                                                                     -1)
         # 彩色图
         elif channels == 3 or channels == 4:
             color = [(255, 0, 0), (0, 255, 0), (0, 0, 255)]
             image = cv.cvtColor(image, cv.COLOR_BGR2RGB) if channels == 3 else cv.cvtColor(image, cv.COLOR_BGRA2RGB)
-            hists = np.array([cv.calcHist([image], channels=[i], mask=None, histSize=[256], ranges=[0, 256]) for i in range(3)]).reshape(3, -1)
-
+            hists = np.array([cv.calcHist([image], channels=[i], mask=None, histSize=[256], ranges=[0, 256]) for i in
+                              range(3)]).reshape(3, -1)
         # 无效图像
         else:
             return
@@ -209,24 +211,28 @@ class HistogramDockWidget(QDockWidget):
                         # 数组级别比较，判断颜色是否相等
                         if np.array_equal(c, lower_color):
                             lower_color = mixColor(lower_color, middle_color, upper_color)
-                            rect = self.scene.addRect(i * width, self.graphicsView.height() - lower_height, width, lower_height)
+                            rect = self.scene.addRect(i * width, self.graphicsView.height() - lower_height, width,
+                                                      lower_height)
                             rect.setBrush(QBrush(QColor(*lower_color)))
                         # 数组级别比较，判断颜色是否相等
                         elif np.array_equal(c, middle_color):
                             middle_color = mixColor(middle_color, upper_color)
-                            rect = self.scene.addRect(i * width, self.graphicsView.height() - middle_height, width, middle_height - lower_height)
+                            rect = self.scene.addRect(i * width, self.graphicsView.height() - middle_height, width,
+                                                      middle_height - lower_height)
                             rect.setBrush(QBrush(QColor(*middle_color)))
                         # 数组级别比较，判断颜色是否相等
                         elif np.array_equal(c, upper_color):
                             upper_color = mixColor(upper_color)
-                            rect = self.scene.addRect(i * width, self.graphicsView.height() - upper_height, width, upper_height - middle_height)
+                            rect = self.scene.addRect(i * width, self.graphicsView.height() - upper_height, width,
+                                                      upper_height - middle_height)
                             rect.setBrush(QBrush(QColor(*upper_color)))
 
                     rect.setOpacity(0.15)
 
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
+    app = QApplication([])
+
 
     class ApplicationWindow(QMainWindow):
 
@@ -236,8 +242,9 @@ if __name__ == "__main__":
             self.addDockWidget(Qt.RightDockWidgetArea, self.histogramDockWidget)
             image = cv.imread(r'C:\Users\admin\Desktop\code\Python\PySide6\Photoshop\Data\girl.jpg')
             gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
-            self.histogramDockWidget.showHistogram(image)
+            self.histogramDockWidget.showHistogram(image, modes=AddColorMode.MIX)
             # self.histogramDockWidget.showHistogram(gray)
+
 
     mainWindow = ApplicationWindow()
     mainWindow.show()

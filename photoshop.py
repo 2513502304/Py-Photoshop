@@ -2,7 +2,8 @@
 
 from PySide6 import QtCore, QtWidgets, QtGui
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QLabel, QGraphicsView, QGraphicsScene, QGraphicsItem, QGraphicsPixmapItem
+from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QLabel, QGraphicsView, \
+    QGraphicsScene, QGraphicsItem, QGraphicsPixmapItem
 from PySide6.QtGui import QDragEnterEvent, QDragMoveEvent, QDragLeaveEvent, QDropEvent, QImage, QPixmap, QPicture
 from photoshop_ui import Ui_PhotoShop
 import numpy as np
@@ -125,7 +126,7 @@ class Photoshop(QMainWindow):
             self.pixmapItem.setPixmap(pixmap)
 
         # 显示直方图
-        self.histogramDockWidget.showHistogram(self.image)
+        self.histogramDockWidget.showHistogram(self.image, modes=charts.AddColorMode.MIX)
 
     def showVideo(self, video):
         '''显示视频'''

@@ -3,7 +3,8 @@
 from PySide6 import QtCore, QtWidgets, QtGui
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QGraphicsView, QGraphicsScene, QGraphicsItem
-from PySide6.QtGui import QDragEnterEvent, QDragMoveEvent, QDragLeaveEvent, QDropEvent, QImage, QPixmap, QPicture, QWheelEvent, QMouseEvent, QKeyEvent
+from PySide6.QtGui import QDragEnterEvent, QDragMoveEvent, QDragLeaveEvent, QDropEvent, QImage, QPixmap, QPicture, \
+    QWheelEvent, QMouseEvent, QKeyEvent
 
 
 class GraphicView(QGraphicsView):

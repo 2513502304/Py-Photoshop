@@ -17,6 +17,21 @@ def cheakImageType(image: np.ndarray) -> int:
     return channels
 
 
+def universalColor(image: np.ndarray) -> np.ndarray:
+    '''通用颜色空间转换，将任意图像转换为通用的 BGRA 格式'''
+    # 判断图像类型
+    channels = cheakImageType(image)
+    # 灰度图
+    if channels == 0:
+        return cv.cvtColor(image, cv.COLOR_GRAY2BGRA)
+    # 彩色图
+    elif channels == 3:
+        return cv.cvtColor(image, cv.COLOR_BGR2BGRA)
+    # 带有 Alpha 通道的彩色图
+    elif channels == 4:
+        return image.copy()
+
+
 def Pillow2Mat(image: Image) -> np.ndarray or None:
     '''PIL 转换为 Mat'''
     return cv.cvtColor(np.array(image), cv.COLOR_RGB2BGR)
@@ -27,28 +42,31 @@ def QImage2Mat(image: QImage) -> np.ndarray or None:
     switcher = {
         # 8 位索引存储图像
         QImage.Format.Format_Indexed8:
-        lambda: np.array(image.constBits()).reshape(image.height(), image.width()).astype(np.uint8),
+            lambda: np.array(image.constBits()).reshape(image.height(), image.width()).astype(np.uint8),
         # 8 位灰度图存储图像
         QImage.Format.Format_Grayscale8:
-        lambda: np.array(image.constBits()).reshape(image.height(), image.width()).astype(np.uint8),
+            lambda: np.array(image.constBits()).reshape(image.height(), image.width()).astype(np.uint8),
         # 24 位 RGB 格式(8-8-8)存储图像，这是一种字节顺序格式，强制读取顺序为 R、G、B，这意味着 24 位编码在大端和小端架构之间有所不同，分别是(0xRRGGBB)和(0xBBGGRR)。如果读取为字节 0xRR、0xGG、0xBB，则任何体系结构上的颜色顺序都是相同的
         QImage.Format.Format_RGB888:
-        lambda: cv.cvtColor(np.array(image.constBits()).reshape(image.height(), image.width(), 3).astype(np.uint8), cv.COLOR_RGB2BGR),
+            lambda: cv.cvtColor(np.array(image.constBits()).reshape(image.height(), image.width(), 3).astype(np.uint8),
+                                cv.COLOR_RGB2BGR),
         # 32 位 RGB 格式(0xFFRRGGBB)存储图像，无论在大端还是小端架构上，颜色顺序都是相同的(0xFFRRGGBB)
         QImage.Format.Format_RGB32:
-        lambda: np.array(image.constBits()).reshape(image.height(), image.width(), 4).astype(np.uint8),
+            lambda: np.array(image.constBits()).reshape(image.height(), image.width(), 4).astype(np.uint8),
         # 32 位 ARGB 格式(0xAARRGGBB)存储图像，无论在大端还是小端架构上，颜色顺序都是相同的(0xAARRGGBB)
         QImage.Format.Format_ARGB32:
-        lambda: np.array(image.constBits()).reshape(image.height(), image.width(), 4).astype(np.uint8),
+            lambda: np.array(image.constBits()).reshape(image.height(), image.width(), 4).astype(np.uint8),
         #  预乘的 32 位 ARGB 格式(0xAARRGGBB)存储图像，无论在大端还是小端架构上，颜色顺序都是相同的(0xAARRGGBB)。图像使用预乘的 32 位 ARGB 格式(0xAARRGGBB)存储，即红色、绿色和蓝色通道乘以 alpha 分量除以 255(如果 RR、GG 或 BB 的值高于 Alpha 通道，则结果未定义)。某些操作(例如使用 alpha 混合的图像合成)使用预乘 ARGB32 比使用普通 ARGB32 更快
         QImage.Format.Format_ARGB32_Premultiplied:
-        lambda: np.array(image.constBits()).reshape(image.height(), image.width(), 4).astype(np.uint8),
+            lambda: np.array(image.constBits()).reshape(image.height(), image.width(), 4).astype(np.uint8),
         # 32 位字节排序的 RGBA 格式(0xRRGGBBAA)存储图像，与 QImage::Format_ARGB32 不同，这是一种字节顺序格式，强制读取顺序为 R、G、B、A，这意味着 32 位编码在大端和小端架构之间有所不同，分别是(0xRRGGBBAA)和(0xAABBGGRR)。如果读取为字节 0xRR、0xGG、0xBB、0xAA，则任何体系结构上的颜色顺序都是相同的
         QImage.Format.Format_RGBA8888:
-        lambda: cv.cvtColor(np.array(image.constBits()).reshape(image.height(), image.width(), 4).astype(np.uint8), cv.COLOR_RGBA2BGRA),
+            lambda: cv.cvtColor(np.array(image.constBits()).reshape(image.height(), image.width(), 4).astype(np.uint8),
+                                cv.COLOR_RGBA2BGRA),
         # 预乘的 32 位字节排序的 RGBA 格式(0xRRGGBBAA)存储图像，与 QImage::Format_ARGB32_Premultiplied 不同，这是一种字节顺序格式，强制读取顺序为 R、G、B、A，这意味着 32 位编码在大端和小端架构之间有所不同，分别是(0xRRGGBBAA)和(0xAABBGGRR)。如果读取为字节 0xRR、0xGG、0xBB、0xAA，则任何体系结构上的颜色顺序都是相同的。图像使用预乘的 32 位字节顺序 RGBA 格式(8-8-8-8)存储，即红色、绿色和蓝色通道乘以 alpha 分量除以 255(如果 RR、GG 或 BB 的值高于 Alpha 通道，则结果未定义)。某些操作(例如使用 alpha 混合的图像合成)使用预乘 RGBA8888 比使用普通 RGBA8888 更快
         QImage.Format.Format_RGBA8888_Premultiplied:
-        lambda: cv.cvtColor(np.array(image.constBits()).reshape(image.height(), image.width(), 4).astype(np.uint8), cv.COLOR_RGBA2BGRA),
+            lambda: cv.cvtColor(np.array(image.constBits()).reshape(image.height(), image.width(), 4).astype(np.uint8),
+                                cv.COLOR_RGBA2BGRA),
     }
     return switcher.get(image.format(), lambda: None)()
 
@@ -83,11 +101,15 @@ class Reader:
         self.readers = {
             # https://docs.opencv.org/5.x/d4/da8/group__imgcodecs.html
             'cv_image':
-            ['bmp', 'dib', 'jpeg', 'jpg', 'jpe', 'jp2', 'png', 'webp', 'avif', 'pbm', 'pgm', 'ppm', 'pxm', 'pnm', 'pfm', 'sr', 'ras', 'tiff', 'tif', 'exr', 'hdr', 'pic'],
+                ['bmp', 'dib', 'jpeg', 'jpg', 'jpe', 'jp2', 'png', 'webp', 'avif', 'pbm', 'pgm', 'ppm', 'pxm', 'pnm',
+                 'pfm', 'sr', 'ras', 'tiff', 'tif', 'exr', 'hdr', 'pic'],
             'pil_image': [
-                'blp', 'bmp', 'bufr', 'cur', 'dcx', 'dds', 'dib', 'eps', 'ps', 'fit', 'fits', 'flc', 'fli', 'ftc', 'ftu', 'gbr', 'gif', 'grib', 'h5', 'hdf', 'icns', 'ico', 'im',
-                'iim', 'jfif', 'jpe', 'jpeg', 'jpg', 'j2c', 'j2k', 'jp2', 'jpc', 'jpf', 'jpx', 'mpeg', 'mpg', 'msp', 'pcd', 'pcx', 'pxr', 'apng', 'png', 'pbm', 'pfm', 'pgm', 'pnm',
-                'ppm', 'psd', 'qoi', 'bw', 'rgb', 'rgba', 'sgi', 'ras', 'icb', 'tga', 'vda', 'vst', 'tif', 'tiff', 'webp', 'emf', 'wmf', 'xbm', 'xpm'
+                'blp', 'bmp', 'bufr', 'cur', 'dcx', 'dds', 'dib', 'eps', 'ps', 'fit', 'fits', 'flc', 'fli', 'ftc',
+                'ftu', 'gbr', 'gif', 'grib', 'h5', 'hdf', 'icns', 'ico', 'im',
+                'iim', 'jfif', 'jpe', 'jpeg', 'jpg', 'j2c', 'j2k', 'jp2', 'jpc', 'jpf', 'jpx', 'mpeg', 'mpg', 'msp',
+                'pcd', 'pcx', 'pxr', 'apng', 'png', 'pbm', 'pfm', 'pgm', 'pnm',
+                'ppm', 'psd', 'qoi', 'bw', 'rgb', 'rgba', 'sgi', 'ras', 'icb', 'tga', 'vda', 'vst', 'tif', 'tiff',
+                'webp', 'emf', 'wmf', 'xbm', 'xpm'
             ],
             #
             'qt_image': [],
