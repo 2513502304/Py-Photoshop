@@ -1,10 +1,12 @@
 '''
-    Created by: Chijiang Zhai
-    Date: 2023-12-17
-    Python version: 3.11.3 64-bit
-    Description:
-        Main file for Photoshop application
+Author: 未来可欺 2513502304@qq.com
+Date: 2023-12-17 23:22:19
+LastEditors: 未来可欺 2513502304@qq.com
+LastEditTime: 2025-07-31 01:53:07
+Python version: 3.11.3 64-bit
+Description: Main file for Photoshop application
 '''
+
 import sys
 import photoshop as ps
 

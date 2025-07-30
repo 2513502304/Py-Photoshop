@@ -1,15 +1,15 @@
-'''MainWindow for Photoshop'''
+"""MainWindow for Photoshop"""
 
-from PySide6 import QtCore, QtWidgets, QtGui
-from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QLabel, QGraphicsView, \
-    QGraphicsScene, QGraphicsItem, QGraphicsPixmapItem
-from PySide6.QtGui import QDragEnterEvent, QDragMoveEvent, QDragLeaveEvent, QDropEvent, QImage, QPixmap, QPicture
-from photoshop_ui import Ui_PhotoShop
 import numpy as np
-import utils
-import imgproc
+from PySide6 import QtCore, QtGui, QtWidgets
+from PySide6.QtCore import Qt
+from PySide6.QtGui import (QDragEnterEvent, QDragLeaveEvent, QDragMoveEvent, QDropEvent, QImage, QPicture, QPixmap)
+from PySide6.QtWidgets import (QApplication, QFileDialog, QGraphicsItem, QGraphicsPixmapItem, QGraphicsScene, QGraphicsView, QLabel, QMainWindow, QMessageBox)
+
 import charts
+import imgproc
+import utils
+from photoshop_ui import Ui_PhotoShop
 
 
 class Photoshop(QMainWindow):
@@ -63,7 +63,12 @@ class Photoshop(QMainWindow):
 
     # ------------------------------------ 重载 ------------------------------------
     def dragEnterEvent(self, event: QDragEnterEvent) -> None:
-        '''拖拽进入事件'''
+        """
+        拖拽进入事件
+
+        Args:
+            event (QDragEnterEvent): 拖拽进入事件
+        """
         # 若拖拽数据中包含 URL，则接受拖拽
         if event.mimeData().hasUrls():
             # 接受建议动作：默认为 CopyAction
@@ -73,7 +78,12 @@ class Photoshop(QMainWindow):
             event.ignore()
 
     def dragMoveEvent(self, event: QDragMoveEvent) -> None:
-        '''拖拽移动事件'''
+        """
+        拖拽移动事件
+
+        Args:
+            event (QDragMoveEvent): 拖拽移动事件
+        """
         # 若拖拽数据中包含 URL，则接受拖拽
         if event.mimeData().hasUrls():
             # 接受建议动作：默认为 CopyAction
@@ -83,10 +93,20 @@ class Photoshop(QMainWindow):
             event.ignore()
 
     def dragLeaveEvent(self, event: QDragLeaveEvent) -> None:
-        '''拖拽离开事件'''
+        """
+        拖拽离开事件
+
+        Args:
+            event (QDragLeaveEvent): 拖拽离开事件
+        """
 
     def dropEvent(self, event: QDropEvent) -> None:
-        '''拖拽释放事件'''
+        """
+        拖拽释放事件
+
+        Args:
+            event (QDropEvent): 拖拽释放事件
+        """
         # 遍历拖拽数据中的 URL
         for url in event.mimeData().urls():
             # 若 URL 为本地文件
@@ -98,7 +118,9 @@ class Photoshop(QMainWindow):
 
     # ------------------------------------ 成员函数 ------------------------------------
     def updateScene(self) -> None:
-        '''更新场景'''
+        """
+        更新场景
+        """
         # 如果读取器状态改变，清空场景
         if self.reader.stateChanged:
             self.graphicScene.clear()
@@ -106,7 +128,12 @@ class Photoshop(QMainWindow):
         # QMessageBox.information(self, '提示', f'{self.reader.state}')
 
     def showImage(self, image: QImage) -> None:
-        '''显示图片'''
+        """
+        显示图片
+
+        Args:
+            image (QImage): 输入图片
+        """
         # 若图片为 None，则返回
         if image is None:
             return
@@ -128,8 +155,13 @@ class Photoshop(QMainWindow):
         # 显示直方图
         self.histogramDockWidget.showHistogram(self.image, modes=charts.AddColorMode.MIX)
 
-    def showVideo(self, video):
-        '''显示视频'''
+    def showVideo(self, video) -> None:
+        """
+        显示视频
+
+        Args:
+            video (_type_): 输入视频
+        """
         # 如果视频为 None，则返回
         if video is None:
             return
@@ -139,8 +171,13 @@ class Photoshop(QMainWindow):
 
         # TODO: 播放视频
 
-    def showAudio(self, audio):
-        '''显示音频'''
+    def showAudio(self, audio) -> None:
+        """
+        播放音频
+
+        Args:
+            audio (_type_): 输入音频
+        """
         # 如果音频为 None，则返回
         if audio is None:
             return
@@ -153,7 +190,12 @@ class Photoshop(QMainWindow):
     # ------------------------------------ 槽函数 ------------------------------------
     @QtCore.Slot(str, name='openFile', result=None)
     def openFile(self, file: str = '') -> None:
-        '''打开文件，默认文件为空，表示打开文件对话框选择文件'''
+        """
+        打开文件，默认文件为空，表示打开文件对话框选择文件
+
+        Args:
+            file (str): 文件路径，默认为空字符串，表示打开文件对话框选择文件. Defaults to ''.
+        """
         # 读取文件路径
         self.file = file
         # 若文件路径为空，则打开文件对话框选择文件
@@ -184,7 +226,12 @@ class Photoshop(QMainWindow):
 
     @QtCore.Slot(np.ndarray, name='gray', result=None)
     def gray(self, image: np.ndarray) -> None:
-        '''灰度'''
+        """
+        灰度
+        
+        Args:
+            image (np.ndarray): 输入图像
+        """
         # 灰度处理
         grayImage = imgproc.gray(image)
         # 如果灰度图像为空，则返回
@@ -195,7 +242,12 @@ class Photoshop(QMainWindow):
 
     @QtCore.Slot(np.ndarray, name='monochrome', result=None)
     def monochrome(self, image: np.ndarray) -> None:
-        '''黑白'''
+        """
+        黑白
+        
+        Args:
+            image (np.ndarray): 输入图像
+        """
         # 黑白处理
         monochromeImage = imgproc.monochrome(image)
         # 如果黑白图像为空，则返回
@@ -206,7 +258,12 @@ class Photoshop(QMainWindow):
 
     @QtCore.Slot(np.ndarray, name='inversion', result=None)
     def inversion(self, image: np.ndarray) -> None:
-        '''反相'''
+        """
+        反相
+        
+        Args:
+            image (np.ndarray): 输入图像
+        """
         # 反相处理
         inversionImage = imgproc.inversion(image)
         # 如果反相图像为空，则返回
@@ -217,7 +274,12 @@ class Photoshop(QMainWindow):
 
     @QtCore.Slot(np.ndarray, name='thresholds', result=None)
     def thresholds(self, image: np.ndarray) -> None:
-        '''阈值'''
+        """
+        阈值
+                
+        Args:
+            image (np.ndarray): 输入图像
+        """
         # 阈值处理
         thresholdsImage = imgproc.thresholds(image)
         # 如果阈值图像为空，则返回
@@ -228,7 +290,12 @@ class Photoshop(QMainWindow):
 
     @QtCore.Slot(np.ndarray, name='toneHomogenization', result=None)
     def toneHomogenization(self, image: np.ndarray) -> None:
-        '''色调均化'''
+        """
+        色调均化
+                
+        Args:
+            image (np.ndarray): 输入图像
+        """
         # 色调均化处理
         toneHomogenizationImage = imgproc.toneHomogenization(image)
         # 如果色调均化图像为空，则返回

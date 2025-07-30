@@ -1,10 +1,9 @@
-'''Graphics View'''
+"""Graphics View"""
 
-from PySide6 import QtCore, QtWidgets, QtGui
+from PySide6 import QtCore, QtGui, QtWidgets
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QGraphicsView, QGraphicsScene, QGraphicsItem
-from PySide6.QtGui import QDragEnterEvent, QDragMoveEvent, QDragLeaveEvent, QDropEvent, QImage, QPixmap, QPicture, \
-    QWheelEvent, QMouseEvent, QKeyEvent
+from PySide6.QtGui import (QDragEnterEvent, QDragLeaveEvent, QDragMoveEvent, QDropEvent, QImage, QKeyEvent, QMouseEvent, QPicture, QPixmap, QWheelEvent)
+from PySide6.QtWidgets import QGraphicsItem, QGraphicsScene, QGraphicsView
 
 
 class GraphicView(QGraphicsView):
@@ -12,10 +11,13 @@ class GraphicView(QGraphicsView):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-    def wheelEvent(self, event: QWheelEvent):
-        '''
+    def wheelEvent(self, event: QWheelEvent) -> None:
+        """
         鼠标滚轮事件
-        '''
+
+        Args:
+            event (QWheelEvent): 鼠标滚轮事件
+        """
         # 缩放因子
         scaleFactor = 1.2
         # 旋转因子
@@ -68,10 +70,13 @@ class GraphicView(QGraphicsView):
                 self.verticalScrollBar().setValue(self.verticalScrollBar().value() + translateFactor)
         # super().wheelEvent(event)
 
-    def keyPressEvent(self, event: QKeyEvent):
-        '''
-        键盘事件
-        '''
+    def keyPressEvent(self, event: QKeyEvent) -> None:
+        """
+        键盘按下事件
+
+        Args:
+            event (QKeyEvent): 键盘事件
+        """
         # 缩放因子
         scaleFactor = 1.2
         # 旋转因子
